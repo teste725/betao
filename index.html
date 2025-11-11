@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Para o nosso querido amigo e professor Alberto</title>
+<title>Para o nosso querido Alberto</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
 
@@ -127,29 +127,8 @@ button:hover {
 </style>
 </head>
 <body>
-<div class="container">
-<h1>💙 Alberto, temos um desafio especial para você 💙</h1>
-<p class="subtitle">Resolva os enigmas e descubra a mensagem que criamos com todo o nosso carinho.</p>
-
-<div id="progress-text"></div>
-<div class="progress"><i id="progress-bar"></i></div>
-<div id="riddles"></div>
-<div id="final" class="final" style="display:none;"></div>
-<button id="reset" style="display:none;">Recomeçar</button>
-</div>
 
 <script>
-const riddles = [
-  "Sou conhecido por transformar dúvidas em aprendizado e falhas em oportunidades. Quem sou eu?",
-  "Sou aquele que acredita no potencial de cada aluno, mesmo quando as ideias deles eram loucas e pareciam impossíveis. Quem sou eu?",
-  "Com paciência infinita e café na mão, ajudei vocês a não desistirem e a conquistarem coisas incríveis. Quem sou eu?",
-  "Ensinei códigos, mas o que mais queria era ensinar vocês a acreditarem em si mesmos. Quem sou eu?",
-  "Sou aquele que viu em cada linha de código o esforço e o crescimento de vocês, e me orgulho de cada conquista. Quem sou eu?"
-];
-
-const validAnswers = ["alberto", "betão", "o melhor professor", "betao", "alberto"];
-let solved = [];
-
 const finalMessage = `Há pessoas que entram na nossa vida de maneira silenciosa, quase sem percebermos.
 E, quando damos conta, elas já estão ali, marcando cada capítulo da nossa história com gestos, palavras e atitudes que transformam.
 
@@ -164,7 +143,7 @@ Você nos ensinou sobre humanidade, sobre empatia, sobre o poder de não desisti
 
 Com você aprendemos que um bom desenvolvedor não é aquele que sabe todas as respostas, mas aquele que tem coragem de buscar. E foi isso que você nos inspirou a fazer: buscar, questionar, crescer.
 
-Nós começamos essa jornada como estudantes, mas terminamos como pessoas diferentes, mais confiantes, mais fortes e, principalmente, mais gratas.
+Nos começamos essa jornada como estudantes, mas terminamos como pessoas diferentes, mais confiantes, mais fortes e, principalmente, mais gratas.
 
 Porque cada linha de código que escrevemos carrega um pouco do que você nos passou:
 a calma diante dos erros, o riso diante das falhas, e o brilho nos olhos diante de uma ideia que finalmente funciona.
@@ -189,80 +168,101 @@ E por isso, queremos te convidar, com todo o coração, a continuar fazendo part
 como nosso padrinho da vida e da tecnologia, nosso guia e nosso eterno amigo.
 
 Com todo o amor, admiração e carinho do mundo,
-João Paulo, João Victor e Verediane 💙`;
+João Paulo, João Victor e Verediane`;
 
-const riddlesContainer = document.getElementById('riddles');
-const progressText = document.getElementById('progress-text');
-const progressBar = document.getElementById('progress-bar');
-const finalDiv = document.getElementById('final');
-const resetBtn = document.getElementById('reset');
-
-function renderRiddles() {
-  riddlesContainer.innerHTML = '';
-  riddles.forEach((r, i) => {
-    const div = document.createElement('div');
-    div.className = 'riddle';
-    if (solved.includes(i)) {
-      div.innerHTML = ✅ ${r}<br><em>Resolvido com sabedoria!</em>;
-    } else {
-      div.innerHTML = `
-        <strong>${r}</strong><br>
-        <select id="ans${i}">
-          <option value="">Escolha uma opção...</option>
-          <option>Alberto</option>
-          <option>Betão</option>
-          <option>O melhor professor</option>
-          <option>ALBERTO</option>
-          <option>BETÃO</option>
-        </select>
-        <br><button onclick="checkAnswer(${i})">Enviar</button>
-        <div id="msg${i}" style="margin-top:6px;font-weight:bold;"></div>
-      `;
-    }
-    riddlesContainer.appendChild(div);
-  });
-  updateProgress();
-}
-
-function checkAnswer(id) {
-  const ans = document.getElementById(ans${id}).value.toLowerCase().trim();
-  const msg = document.getElementById(msg${id});
-  if (validAnswers.includes(ans)) {
-    msg.textContent = "💙 Resposta certa! Você realmente se reconhece, Betão!";
-    solved.push(id);
-    renderRiddles();
-  } else {
-    msg.textContent = "🤔 Hmmm... será mesmo? Pensa de novo, Alberto!";
-  }
-}
-
-function updateProgress() {
-  const total = riddles.length;
-  const done = solved.length;
-  progressText.textContent = Progresso: ${done}/${total};
-  progressBar.style.width = ${(done/total)*100}%;
-
-  if (done === total) {
-    riddlesContainer.style.display = "none";
-    progressText.style.display = "none";
-    progressBar.parentElement.style.display = "none";
-    finalDiv.textContent = finalMessage;
-    finalDiv.style.display = "block";
-    resetBtn.style.display = "inline-block";
-  }
-}
-
-resetBtn.onclick = () => {
-  solved = [];
-  finalDiv.style.display = "none";
-  resetBtn.style.display = "none";
-  riddlesContainer.style.display = "block";
-  progressText.style.display = "block";
-  progressBar.parentElement.style.display = "block";
-  renderRiddles();
+const riddles = {
+1: 'Sou conhecido por transformar dúvidas em aprendizado e falhas em oportunidades. Quem sou eu?',
+2: 'Sou aquele que acredita no potencial de cada aluno, mesmo quando as ideias deles eram loucas e pareciam impossíveis. Quem sou eu?',
+3: 'Com paciência infinita e café na mão, ajudei vocês a não desistirem e a conquistarem coisas incríveis. Quem sou eu?',
+4: 'Ensinei códigos, mas o que mais queria era ensinar vocês a acreditarem em si mesmos. Quem sou eu?',
+5: 'Sou aquele que viu em cada linha de código o esforço e o crescimento de vocês, e me orgulho de cada conquista. Quem sou eu?'
 };
 
-renderRiddles();
+const validAnswers = ['alberto','betão','o melhor professor','betao'];
+
+function getSolved() {
+    return JSON.parse(localStorage.getItem('solvedRiddles') || '{}');
+}
+
+function saveSolved(solved) {
+    localStorage.setItem('solvedRiddles', JSON.stringify(solved));
+}
+
+function resetProgress() {
+    localStorage.removeItem('solvedRiddles');
+    location.reload();
+}
+
+function submitAnswer(id) {
+    const select = document.querySelector(`#answer${id}`);
+    const answer = select.value.toLowerCase();
+
+    if (!answer) return;
+
+    if (validAnswers.includes(answer)) {
+        const solved = getSolved();
+        solved[id] = true;
+        saveSolved(solved);
+    }
+
+    location.reload();
+}
+
+function buildPage() {
+    const solved = getSolved();
+    const solvedCount = Object.keys(solved).length;
+    const total = Object.keys(riddles).length;
+    const allSolved = solvedCount >= total;
+
+    document.write(`
+    <div class="container">
+    <h1>Alberto, temos um desafio especial para você</h1>
+    <p class="subtitle">Resolva os enigmas e descubra a mensagem que criamos com todo o nosso carinho.</p>
+    `);
+
+    if (!allSolved) {
+        document.write(`
+            <div>Progresso: ${solvedCount}/${total}</div>
+            <div class="progress"><i style="width:${Math.round(100 * solvedCount / total)}%"></i></div>
+        `);
+
+        Object.entries(riddles).forEach(([id, text]) => {
+            if (solved[id]) {
+                document.write(`
+                <div class="riddle">✅ ${text}<br><em>Resolvido com sabedoria!</em></div>
+                `);
+            } else {
+                document.write(`
+                <div class="riddle">
+                    <strong>${text}</strong><br>
+                    <select id="answer${id}">
+                        <option value="">Escolha uma opção...</option>
+                        <option>Alberto</option>
+                        <option>Betão</option>
+                        <option>O melhor professor</option>
+                        <option>ALBERTO</option>
+                        <option>BETÃO</option>
+                    </select><br>
+                    <button onclick="submitAnswer(${id})">Enviar</button>
+                </div>
+                `);
+            }
+        });
+
+    } else {
+        document.write(`
+        <h2>🎉 Parabéns, Alberto! 🎉</h2>
+        <p>Você desvendou todos os enigmas e agora merece descobrir a nossa mensagem mais sincera:</p>
+        <div class="final">${finalMessage.replace(/\n/g,'<br>')}</div>
+        <br><button onclick="resetProgress()">Recomeçar</button>
+        `);
+    }
+
+    document.write(`</div>`);
+}
+
+buildPage();
 </script>
+
 </body>
 </html>
